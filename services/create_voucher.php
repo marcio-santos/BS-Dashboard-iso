@@ -106,7 +106,7 @@ EOT;
 }
 
 try {
-//1.CRIA VOUCHER COM ID UNICO
+//1.CRIA VOUCHER COM ID UNICO unicamente
     $voucher = uuid();
     $comprador = $_POST['cpf'];
     $data = Date('Y-m-d H:i:s');
