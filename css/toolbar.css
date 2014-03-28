@@ -1,0 +1,248 @@
+body {
+    font-size   :12px;
+    color: #1F1E1D;
+}
+a {color    :navy;}
+th {
+    background-color    :#ccc ;
+    font-size   :10px;
+    line-height: 80%;
+    display :none;
+}
+table {
+    margin-left: 7px;
+}
+.toolbar {
+    display: block;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 80px; /* Width of new image */
+    height: 54px; /* Height of new image */
+    padding-left: 0px; /* Equal to width of new image */
+    cursor: pointer;
+}
+.frame {
+    background-color:transparent;
+    width:688px;
+    height: 550px;
+}
+.response {
+    font-size:18px;
+    padding-left:20px;
+    color:#666;
+    font-weight:bold;
+    height:560px;
+    vertical-align:top;
+    padding-top:10px;
+    overflow:auto;
+    display:block
+
+}
+
+.frame_lista {
+    overflow:auto;
+    height:540px;
+    width:100%;
+    background-color: fuchsia;
+}
+
+.colum2 { width:598px;}
+.colum1 {  vertical-align:top; width:80px;}
+
+.PENDENTE {cursor: pointer; color:red}
+.PAGO {cursor: pointer; color:green}
+.REJEITADO {cursor: pointer; color:red}
+.CANCELADO {cursor: pointer; color:red}
+.descricao {
+    font-size: 12px;
+    color: black;
+    font-weight: bold;
+}
+.status-pagamento {
+    font-size: 15px;
+    color: red;
+    font-weight: bold;
+}
+.client-info {
+    font-size:    13px;
+    color:    #666;
+}
+.pagto-info {
+    font-size:    13px;
+    color:    #666;
+}
+.transacao-id {
+    font-size: 12px;
+    color:    #666;
+    border: 1px dashed #ccc;
+    padding: 10px;
+    text-align: center;
+    margin-top: 15px;
+}
+.frame-detail {
+    margin-left:10px;
+}
+
+.startpage {
+    margin-left: 25px;
+    margin-bottom: 30px;
+    line-height: 150%;
+}
+
+#map_ev{
+  display: block;
+  float:right;
+  margin-right: 5px;
+  width: 570px;
+  height: 350px;
+  -moz-box-shadow: 0px 5px 5px #ccc;
+  -webkit-box-shadow: 0px 5px 5px #ccc;
+  box-shadow: 0px 5px 5px #ccc;
+  border: 1px solid #ccc;
+}
+.graph_response {
+    width: 580px;
+    height: 350px;
+    display: none;
+}
+.dashboard_response {
+    width: 580px;
+    height: 350px;
+    display: none;
+}
+.despacho_response {
+    width: 580px;
+    height: 350px;
+    display: none;
+}
+
+.saldo {
+    font-size:20px;
+    font-weight:bold;
+    color: #666;
+    text-align: center;
+}
+
+.fancybox-outer {
+ background-color: #FFF; /* or whatever */
+}
+
+.wait_dispatch {
+    display:inline;
+    text-align:right;
+    margin: 8px;
+}
+
+.change_page {
+    width: 580px;
+    height: 350px;
+    display: none;
+
+}
+.frm {
+    margin-top:20px;
+    margin-left: 20px;
+
+}
+
+.lista_espera {
+    width: 380px;
+    padding:5px;
+    height: 500;
+    display:none;
+}
+
+.escala {
+    display:block;
+    clear: both;
+    padding-top: 10px;
+    padding-left: 30px;
+
+}
+input.treino {
+    width: 250px;
+
+}
+
+input.pagto {
+	width: 80px;
+}
+
+input.ok {
+    border-left: solid 16px #006600;
+}
+
+input.error {
+    border-left: solid 16px #FF0000;
+}
+
+#voucher_response {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#frame_cupom {
+    width: 530px;
+    height: 396px;
+}
+
+.close {
+    margin-top: 5px;
+    margin-right: 5px;
+    float:right;
+    position: relative;
+    cursor:pointer;
+}
+
+#title_voucher {
+    padding-top: 20px;
+}
+
+#form_cupom {
+    padding-top: 20px;
+    padding-left: 40px;
+}
+
+#voucher_response {
+    margin-top: 20px;
+    text-align: center;
+}
+
+input.btn-voucher {
+    width:80%;
+    margin-bottom: 10px;
+}
+
+#boleto_frame {
+    width: 560px;
+    height: 400px;
+    /*display:block;*/
+}
+
+#consulta_lcol {
+    margin-top:20px;
+    margin-left:10px;
+    display:block;
+    width: 250px;
+    float:left;
+    vertical-align:top;
+    align-content: center;
+}
+
+#consulta_rcol {
+    margin-top:20px;
+    margin-left:10px;
+    display:block;
+    width: 250px;
+    float:left;
+}
+
+#boleto_response {
+    margin-top:30px;
+    padding-top:10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+
+}

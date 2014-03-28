@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Documento sem título</title>
+<!-- USAR O FIREFOX COM MARGENS 0;0;0;0.2 -->
+
+<style>
+body {
+	font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+}
+#coluna1{
+        position:absolute;
+        width:97mm;
+        height:255mm;
+        left:0px;
+        margin-left: 0mm;
+        margin-top: 4.1mm;
+        margin-right: 4.7mm;
+        margin-bottom: 3.8mm;
+        border:1px solid white;
+
+}
+
+#coluna2{
+       position:absolute;
+        width:97mm;
+        height:252mm;
+        left:106mm;
+        margin-left: 0mm;
+        margin-top: 4.1mm;
+        margin-bottom: 3.8mm;
+        border:1px solid white;
+
+}
+
+.etiqueta{
+		padding-top:2mm;
+		padding-left: 3mm;
+        width:93mm;
+        height:23mm;
+        border:1px dotted #ccc;
+		float:left;
+		font-size:10pt;
+		overflow:hidden;
+
+}
+.breakhere {
+    page-break-before: auto;
+    clear:both;
+    padding-bottom: 10mm;
+}
+</style>
+</head>
+
+<body>
+<div id="coluna1">
+{COLUNA1}
+</div>
+<div id="coluna2">
+{COLUNA2}
+</div>
+</body>
+</html>

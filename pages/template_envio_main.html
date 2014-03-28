@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Dashboard</title>
+        <link rel="stylesheet" href="css/envio.css">
+        <link rel="stylesheet" href="css/notify.css">
+        <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.9.0/themes/ui-lightness/jquery-ui.css" />
+        <script src="//code.jquery.com/jquery-1.8.3.js"></script>
+        <script src="//code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+        <link rel="stylesheet" href="../fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+        <script type="text/javascript" src="../fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+
+        <script type="text/javascript" src="js/lote.js"></script>
+    </head>
+    <body>
+        <div id="main_frame" class="main_frame">
+            <div id="ex_lcol" class="ex_lcol">
+                <div id="ex_elements" class="ex_elements">
+                </div>
+            </div>
+            <div id="ex_rcol" class="ex_rcol">
+                <div id="ex_control" class="ex_control" style="text-align: center;">
+                        <!-- <button type="button" id="criar_lote" class="css3button">NOVO LOTE</button>   -->
+                        <a id="criar_lote" href="#" class="awesome">NOVO LOTE</a>
+
+                </div>
+                <div id="div_lotes" class="list">
+                    <div class="lote_head">Lotes Anteriores</div>
+                    <div id="frame_list">
+                    <ul id="lotes" class="list">
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id='frmEnvio' style="display:none;">
+            <div id='picker'>
+                <div style="text-align: center;font-size:13px;line-height:110%;padding-bottom:5px; color: red;"><span id="label_enviado">SALVAR COMO ENVIADO EM</span>&nbsp;<span id='dta_enviado'></span></div>
+                <div id="datepicker" align="center"></div>
+                <div id="botoesEnvio" align="center" style="margin-top: 10px;">
+                    <input type="button" id="btnEnvio" name="btnEnvio" value="Salvar" />
+                    <input type="button" id="btnCancelEnvio" name="btnCancelEnvio" value="Cancelar" />
+                </div>
+            </div>
+            <div id='response' align="center" style="display: none;"><p id='p-response' style="padding: 10px;text-align: center;font-size: 20px;"></p><br/><input type="button" class="awesome" id="close-hs" value="FECHAR" /></div>
+        </div>
+    </body>
+</html>

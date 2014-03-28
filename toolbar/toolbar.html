@@ -1,0 +1,156 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Toolbar</title>
+<style>
+.toolbar {
+  display: block;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 80px; /* Width of new image */
+  height: 54px; /* Height of new image */
+  padding-left: 0px; /* Equal to width of new image */
+  cursor: pointer;
+}
+.frame {
+    background-color:#fff;
+    width:680px;
+	height: 600px;
+}
+.response {
+	font-size:18px;
+	padding-left:20px;
+	color:#666;
+	font-weight:bold;
+	height:560px;
+	vertical-align:top;
+	padding-top:10px;
+	overflow:auto;
+	display:block
+	
+	}
+
+.colum2 { width:600px;}
+.colum1 {  vertical-align:top;}
+.iframe {width:580px; height:auto }
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.js"></script>
+
+<link rel="stylesheet" href="../../../_ferramentas/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../../../_ferramentas/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+
+<script>
+$(document).ready(function() {	
+  $('.toolbar').hover(
+    function(){
+        var $img_on = $(this).attr('on');
+        
+      $(this).attr('src',$img_on);
+    }
+)  
+    $('.toolbar').mouseout(function(){
+        var $img_off = $(this).attr('off');
+		if(!$(this).hasClass('selected')) {
+      		$(this).attr('src',$img_off)
+		}
+    });
+    
+	$('.toolbar').click(function(){
+		var the_id = $(this).attr('id');
+		content = getContent($(this).attr('id'));
+		$('#response').text(content);
+		$(this).attr('src',$(this).attr('on'));
+		
+		$('.toolbar').each(function() {
+			if($(this).hasClass('selected')){
+				var $img_off = $(this).attr('off');
+				$(this).removeClass('selected');
+				$(this).attr('src',$img_off);
+			}
+        });
+		
+		$('#'+the_id).addClass('selected');
+		
+		});
+		
+		$('#close').click(function(){
+			$.fancybox.close();
+			})
+		
+	
+    $('#load').click(function(){
+       $.fancybox($(this),{
+            href : '#div_frame',
+            type: 'inline',
+            maxWidth    : 680,
+            maxHeight    : 600,
+            fitToView    : true,
+            modal        : true,
+			locked		: true,
+            width        : 680,
+            height        : 600,
+            autoSize    : false,
+            closeClick    : false,
+            openEffect    : 'elastic',
+            closeEffect    : 'elastic',
+			helpers : {
+        	overlay : {
+            	css : {
+                'background' : 'rgba(255, 255, 255, 0.80)',
+            		}
+        		}
+    		}
+		});
+		});
+  });
+function getContent(name) {
+	var url = "http://bodysystems.net/_ferramentas/dashboard-iso/toolbar/getContent.php"
+	$.ajax({
+            type: "POST",
+            url: url,
+            data: {item:name}, // serializes the form's elements.
+            dataType: "html" ,
+            beforeSend: function(load) {
+                $('#response').html("<div style='margin-top:30px;margin-left:20px;'><img src='http://bodysystems.net/_ferramentas/workshop/images/activity.gif' /></div>");
+
+            } ,
+            success: function(data)
+            {
+                $('#response').html(data);
+
+            } ,
+            error: function (request, status, error) 
+            {
+                $('#response').html('<span style="color: red">Não foi possivel gerar o botão para pagamento.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>');
+            }
+        }); 
+}
+</script>
+</head>
+<body>
+<input type="button" id="load" value="Carregar..." />
+<div id="div_frame" class="frame" style="display:none">
+<div id="tools" style="height:22px;padding:0;margin:0px;width:100%;" align="right"><img id="close" style="cursor:pointer;" src="close_btn.gif" /></div>
+<table id="tb_main">
+    <tr>
+        <td id="toolbar" class="colum1">
+           <div><img id="home" class="toolbar" src="home.png" off="home.png" on="home_on.png" /></div>
+          <div><img id="client" class="toolbar" src="clientes.png" off="clientes.png" on="clientes_on.png" /></div>
+          <div><img id="graph" class="toolbar" src="graph.png" off="graph.png" on="graph_on.png" /></div>
+          <div><img id="dash" class="toolbar" src="dash.png" off="dash.png" on="dash_on.png" /></div>
+          <div><img id="groundw" class="toolbar" src="groundw.png" off="groundw.png" on="groundw_on.png" /></div>
+          <div><img id="despacho" class="toolbar" src="despacho.png" off="despacho.png" on="despacho_on.png" /></div>
+            <div><img id="listas" class="toolbar" src="lista.png" off="lista.png" on="lista_on.png" /></div>
+        </td>
+        <td class="colum2" >
+        		
+        	<div id="response" class="response"></div>
+        </td>
+    </tr>
+</table>
+</div>
+</body>
+</html>

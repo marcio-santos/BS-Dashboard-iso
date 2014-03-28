@@ -1,0 +1,161 @@
+$(document).ready(function(){
+
+    var container = $("#container");
+
+    container.isotope({
+        itemSelector : 'ul#container > li',
+        layoutMode : 'fitRows'
+    });
+
+    $.filtrify("container", "placeHolder", {
+        close    : true,
+        hide     : false,
+        /*query :{"mes" : ["10"]}, */
+        callback : function ( query, match, mismatch ) {
+            container.isotope({ filter : $(match) });
+        }
+    });
+
+    $('.fb').click(function(){
+        $('.toolbar').each(function(){
+            $(this).removeClass('selected');
+            $(this).attr('src',$(this).attr('off'));
+        });
+        $('#home').addClass('selected');
+        $('#home').attr('src','toolbar/home_on.png')
+
+        $('#start_page').show();
+        $.fancybox($(this),{
+            href : '#div_frame',
+            type: 'inline',
+            maxWidth    : 710,
+            maxHeight    : 585,
+            padding     : 10,
+            fitToView    : true,
+            modal        : true,
+            locked        : true,
+            width        : 710,
+            height        : 585,
+            autoSize    : false,
+            closeClick    : false,
+            openEffect    : 'fade',
+            closeEffect    : 'elastic',
+            helpers : {
+                overlay : {
+                    css : {
+                        'background' : 'rgba(0, 0, 0, 0.80)',
+                    }
+                }
+            }
+        });
+        //load do core list
+        console.log($(this).closest("span").children('#nsa').text());
+        $('#frm_programas')[0].reset();
+        $('#response').html('');
+        $('#head').text('WS '+($(this).closest("div").children('#cidade').text()));
+        $('#local').text($(this).closest("div").children('#endereco').text());
+        $('#id_evento').text($(this).closest("div").children('#programa').text())
+        $('#tb_nsaid').val($(this).closest("div").attr('data-nsa'));
+        $('#dta_evento').text('Realização: '+$(this).closest("div").attr('data-evento'));
+        $('#eventoid').val($('#id_evento').text());
+        $('#descricao').val($('#head').text());
+        $('#data_evento').val($(this).closest("div").attr('data-evento'));
+        $('#tb_eventoid').val($('#id_evento').text());
+
+        //-----START PAGE ------------------
+        var endereco = $(this).closest("div").children('[name=endereco]').text();
+        var local = $(this).closest("div").children('[name=local]').text();;
+        var nome_evento = $(this).closest("div").children('[name=nome_evento]').text();
+        $('#desc_ev').html("<div class='startpage'><span style='font-size:24px;'>"+nome_evento+"</span><br/><span id='span_local' style='font-size:14px;'>"+local+"<br/><span id='span_endereco' style='font-size:14px;'>"+endereco+"</span></div>") ;
+
+        map = new GMaps({
+            el: '#map_ev',
+            lat: -23.4621650,
+            lng: -46.8742740
+        });
+        var $cidade = $(this).closest("div").children('#cidade').text();
+        var $ende = endereco +','+ $cidade +',Brazil';
+        $ende.replace('-',',');
+        GMaps.geocode({
+            address: $ende, //"Rua Coral,71,Guarulhos,Brasil",
+            callback: function(results, status){
+                if(status=='OK'){
+                    var latlng = results[0].geometry.location;
+                    map.setCenter(latlng.lat(), latlng.lng());
+                    map.addMarker({
+                        lat: latlng.lat(),
+                        lng: latlng.lng()
+                    });
+                }
+            }
+        });
+
+        //-----END START PAGE
+
+
+    });
+
+    $('#close').click(function(){
+        //É NECESSARIO REMOVER ESTES ELEMENTOS PARA NÃO DUPLICA-LOS NA PROXIMA CHAMADA
+        $.fancybox.close();
+        $('.st_pagination').remove();
+        $('[name=search]').remove();
+        $('[name=per_page]').remove();
+        $('#user_list').hide();
+        $('#dashboard_response').hide();
+        $('#gw_stream_table').hide();
+        $('#groundw_list').hide();
+        $('#despacho_response').hide();
+        $('#info').hide();
+        
+        //EXPEDIÇÃO
+        $('#dta_liberacao').html('') ;
+        $('#dta_alteracao').html('') ;
+        $('#ativo').removeClass('go').addClass('stop');
+        $('#acao').attr('checked',false);
+        $('#alteracao').html('') ;
+        $('#info').hide();
+        $('#ativo').removeClass('go').addClass('stop').html('ENVIO INATIVO');
+        $('#acao').attr('checked',false);
+
+
+
+
+    });
+
+    $('#cancel').click(function(){
+        $.fancybox.close();
+
+    });
+
+    $('#apply').click(function(){
+        var url = "http://bodysystems.net/_dev/iso/service/data_source.php";
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: $('#frm_programas').serialize(), // serializes the form's elements.
+            dataType: "html" ,
+            beforeSend: function(load) {
+                $('#response').html("<img src='http://bodysystems.net/_ferramentas/workshop/images/activity.gif' />");
+            } ,
+            success: function(data)
+            {
+                if(data=='Success') {
+                    $.fancybox.close();
+                } else {
+                    $('#response').html(data);
+                }
+            } ,
+            error: function (request, status, error)
+            {
+                $('#response').html('<span style="color: red">Não foi possivel salvar a informação.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>');
+                console.log($('#response').text());
+            }
+        });
+
+    });
+
+     container.isotope( 'reloadItems' );
+
+
+});

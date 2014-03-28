@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Controle de Lotes</title>
+        <link rel="stylesheet" href="../css/accordionmenu.css" type="text/css" media="screen" />
+        <style>
+            div.list {
+                width: 200px;
+            }
+
+            ul.list {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            li.list {
+                font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
+                border-bottom: 1px solid #ccc;
+            }
+
+            li.list:last-child {
+                border: none;
+            }
+
+            li.list a {
+                text-decoration: none;
+                color: #fff;
+                display: block;
+                width: 200px;
+
+                -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+                -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+                -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+                -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+                transition: font-size 0.3s ease, background-color 0.3s ease;
+            }
+
+            li.list a:hover {
+                font-size: 25px;
+                color:#000;
+                background: #ffc;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="list">
+            <h2 class="list">HelvetiList</h2>
+            <ul class="list">
+                <li class="list"><a href="#">Zurich</a></li>
+                <li class="list"><a href="#">Geneva</a></li>
+                <li class="list"><a href="#">Winterthur</a></li>
+                <li class="list"><a href="#">Lausanne</a></li>
+                <li class="list"><a href="#">Lucerne</a></li>
+            </ul>
+        </div>
+    </body>
+</html>

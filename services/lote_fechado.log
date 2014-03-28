@@ -1,0 +1,19 @@
+Array
+(
+    [0] => stdClass Object
+        (
+            [nsa] => RIO
+            [transacaoid] => 04B75787-3D3E-7709-8A3A-00000E268890
+            [cnab] => E19090|TR|PJ|EV
+            [idcliente] => 250846
+            [userid] => 19605
+            [nome_evo] => Roberta Duarte Verazzani
+            [user_email] => robertaverazzani@ig.com.br
+            [endereco_remessa] => Rua Professor Carvalho,150,102 - Centro - Muriaé/MG CEP:36880000
+            [valor_frete] => 33.00
+            [dta_liberacao] => 2013-12-18 16:39:15
+            [eventoid] => 19090
+            [origem] => MP
+        )
+
+)

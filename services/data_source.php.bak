@@ -1,0 +1,73 @@
+<?php
+    //RECUPERA O EXTRATO DO MOVIMENTO DO EVENTO
+    include('../../../exec_in_joomla.inc');
+    $eventoid = isset($_POST['eventoid'])? $_POST['eventoid']:'18850' ;
+
+    $db =& JFactory::getDBO();
+
+    //BOLETOS
+    $query = "SELECT DATE_FORMAT(data_compensado,'%d-%m')AS Dia, SUM(valor_cobrado) as Total FROM boletos_bs WHERE cnab LIKE '%$eventoid%' AND compensado = 1 GROUP BY data_compensado;";
+    $db->setQuery($query);
+    $result = $db->loadObjectList();
+    foreach($result as $row){
+        $total = $row->Total;
+        $dia = $row->Dia;
+        $data_bb[] = $dia ;
+        $total_bb[] = floatval($total);
+    }
+
+    //PAGSEGURO
+    $query = "SELECT DATE_FORMAT(Data,'%d-%m-%y')AS Dia, SUM(ProdValor) as Total FROM PagSeguroTransacoes WHERE ProdID LIKE '%$eventoid%' AND StatusTransacao IN ('Aprovado','Completo') GROUP BY Data;";
+    $db->setQuery($query);
+    $result = $db->loadObjectList();
+    foreach($result as $row){
+        $total = $row->Total;
+        $dia = $row->Dia;
+        $data_ps[] = $dia ;
+        $total_ps[] =floatval($total) ;
+
+    }
+
+    //MERCADO PAGO
+    $query = "SELECT data_aprovado AS Dia, SUM(valor_transacao) as Total FROM MercadoPagoTransacoes WHERE cnab  LIKE '%eventoid%' AND `status` LIKE ('approved') GROUP BY data_aprovado";
+    $db->setQuery($query);
+    $result = $db->loadObjectList();
+    foreach($result as $row){
+        $total = $row->Total;
+        $dia = $row->Dia;
+        $data_mp[] = $dia ;
+        $total_mp[] = floatval($total) ;
+    }
+
+    
+     $sumBB = array_sum($total_bb);
+    $sumPS = array_sum($total_ps);
+    $sumMP = array_sum($total_mp);
+    $master_sum = $sumBB + $sumPS + $sumMP ;
+    $master_sum = "Saldo acumulado: R$";
+    
+    $boleto = array($data_bb,$total_bb);
+    $pagseguro = array($data_ps,$total_ps);
+    $mercadopago = array($data_mp,$total_mp);
+    
+    $array = array($boleto,$pagseguro,$mercadopago,'Meses de 2013','Valores x1000');
+
+
+
+
+
+
+
+
+
+
+
+    header("content-type: application/json"); 
+    //$valores = array(7,4,2,8,4,1,9,3,2,16,7,12);
+    //$meses = array('janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro');
+    //$array = array($valores,$meses,'Meses de 2013','Valores x1000');
+    echo $_GET['callback']. '('. json_encode($array) . ')';    
+
+
+
+?>
