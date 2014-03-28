@@ -41,27 +41,27 @@ function sendMyMail($voucher)
     $msg = <<<EOT
     <body style="font-family:Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, sans-serif;font-size:11pt;">
         <h2>$nome</h2>
-        <span style="font-size:16px;font-weight:bold;">Agora você já pode se increver usando seu Cupom!</span>
+        <span style="font-size:16px;font-weight:bold;">Agora vocï¿½ jï¿½ pode se increver usando seu Cupom!</span>
         <hr/>
         <h1>$voucher</h1>
         <hr/>
         <h3>Siga os passos abaixo:</h3>
         <ol>
-            <li>Copie o código de seu Cupom (Selecione e Ctrl+C)</li>
-            <li>Acesse o Calendário de Treinamento <a href="http://bodysystems.net/calendarios/treino" target="_blank"> clique aqui</a></li>
-            <li>Preencha os campos com todos os dados necessários</li>
-            <li>Na etapa de pagamento, escolha a opção 'Pagar com Cupom'</li>
-            <li>Cole o seu código (Ctrl+V) na respectiva caixa</li>
-            <li>Siga os passos finais até a confirmação de sua inscrição</li>
+            <li>Copie o cï¿½digo de seu Cupom (Selecione e Ctrl+C)</li>
+            <li>Acesse o Calendï¿½rio de Treinamento <a href="http://bodysystems.net/calendarios/treino" target="_blank"> clique aqui</a></li>
+            <li>Preencha os campos com todos os dados necessï¿½rios</li>
+            <li>Na etapa de pagamento, escolha a opï¿½ï¿½o 'Pagar com Cupom'</li>
+            <li>Cole o seu cï¿½digo (Ctrl+V) na respectiva caixa</li>
+            <li>Siga os passos finais atï¿½ a confirmaï¿½ï¿½o de sua inscriï¿½ï¿½o</li>
         </ol>
-        <p>Pronto! Agora é só ficar de olho na data correta de seu treinamento, acompanhando em nosso site</p>
+        <p>Pronto! Agora ï¿½ sï¿½ ficar de olho na data correta de seu treinamento, acompanhando em nosso site</p>
         <p>Sucesso!<br/>Time Body Systems</p>
     </body>
 EOT;
 
 
     $data = Date('Y-m-d H:i:s');
-    $msg_dump = "Segue abaixo o seu Voucher para inscrição\n\n$voucher";
+    $msg_dump = "Segue abaixo o seu Voucher para inscriï¿½ï¿½o\n\n$voucher";
 
     file_put_contents('voucher_dump.csv', $msg_dump, FILE_APPEND);
 
@@ -78,15 +78,15 @@ EOT;
     $mail->From = 'noreply@powerjump.com.br';
     $mail->FromName = 'Treinamentos Body Systems';
     $mail->addAddress($email, $nome); // Add a recipient
-    $mail->addAddress('estela_adriana25@hotmail.com', 'Estela Lourenço'); // Name is optional
-    $mail->addReplyTo('noreplay@bodysystems.net', 'Não responda');
+    $mail->addAddress('estela_adriana25@hotmail.com', 'Estela Lourenï¿½o'); // Name is optional
+    $mail->addReplyTo('noreplay@bodysystems.net', 'Nï¿½o responda');
 
     $mail->WordWrap = 50; // Set word wrap to 50 characters
     //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
     //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
     $mail->isHTML(true); // Set email format to HTML
 
-    $mail->Subject = 'Cupom para Inscrição em Treinamento Body Systems';
+    $mail->Subject = 'Cupom para Inscriï¿½ï¿½o em Treinamento Body Systems';
     $mail->Body = $msg;
     $mail->AltBody = $msg_dump;
 
@@ -106,7 +106,7 @@ EOT;
 }
 
 try {
-//1.CRIA VOUCHER
+//1.CRIA VOUCHER COM ID UNICO
     $voucher = uuid();
     $comprador = $_POST['cpf'];
     $data = Date('Y-m-d H:i:s');
@@ -125,7 +125,7 @@ try {
         if ($db->getAffectedRows() > 0) {
             $ret = array(0, $voucher);
         } else {
-            $ret = array(1, 'Não foi possível criar o cupom');
+            $ret = array(1, 'Nï¿½o foi possï¿½vel criar o cupom');
         }
     }
 
@@ -134,7 +134,7 @@ try {
     if ($ret[0] == 0) {
         $mmail = sendMyMail($voucher);
     } else {
-        $mmail = 'email não enviado';
+        $mmail = 'email nï¿½o enviado';
     }
 
 
