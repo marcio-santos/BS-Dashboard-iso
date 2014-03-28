@@ -125,7 +125,7 @@ try {
         if ($db->getAffectedRows() > 0) {
             $ret = array(0, $voucher);
         } else {
-            $ret = array(1, 'N�o foi poss�vel criar o cupom');
+            $ret = array(1, 'Não foi possível criar o cupom');
         }
     }
 
@@ -134,7 +134,7 @@ try {
     if ($ret[0] == 0) {
         $mmail = sendMyMail($voucher);
     } else {
-        $mmail = 'email n�o enviado';
+        $mmail = 'email não enviado';
     }
 
 
