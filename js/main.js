@@ -191,12 +191,13 @@ function startRefresh() {
 function setEscala($task) {
     var evento_id = $('#tb_eventoid').val();
     var professor = $('#treinador').val()
+    var valor = $('#pagto_treinador').val()
     var avisado = $('#aviso_escala').prop('checked');
     var url = "http://bodysystems.net/_ferramentas/dashboard-iso/services/escala.php";
     $.ajax({
         type: "POST",
         url: url,
-        data: {eventoid:evento_id,professor:professor,avisado:avisado,task:$task}, // serializes the form's elements.
+        data: {eventoid:evento_id,professor:professor,valor:valor,avisado:avisado,task:$task}, // serializes the form's elements.
         dataType: "json" ,
         beforeSend: function(load) {
 
@@ -210,7 +211,8 @@ function setEscala($task) {
                 //alert(data[1]);
             } else {
                 $('#treinador').val(data[1]);
-                if(data[2]==1){
+                $('#pagto_treinador').val(data[2]);
+                if(data[3]==1){
                     $('#aviso_escala').attr('checked',true);
                 } else {
                     $('#aviso_escala').attr('checked',false);
