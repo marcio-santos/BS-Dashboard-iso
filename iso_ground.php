@@ -221,8 +221,22 @@ $wsResultMTA = $webService->ListarTreinamentosWebsiteResult->VOBS;
 $tipo_treino = 4;
 
 $params = array('IdClienteW12'=>229, 'IdTipoTreinamento'=>$tipo_treino, 'Inicio'=>$inicio, 'Fim'=>$fim, 'Estado'=>$estado, 'Programa'=>$programa);
+
+
 $webService = $client->ListarTreinamentosWebsite($params);
 $wsResultMC = $webService->ListarTreinamentosWebsiteResult->VOBS;
+
+if(!is_array($wsResultMC)){
+	$wsResultMC = array ( 0 => $wsResultMC);;
+	}
+
+//print "<pre>";
+//print_r($wsResultMTA);
+//print_r($wsResultMC);
+//print (is_array($wsResultMC));
+//print_r($wsResultTR);
+//print_r($params);
+//print "</pre>";
 
     $wsResult = array_merge( $wsResultTR, $wsResultMTA,$wsResultMC );
 } else {
