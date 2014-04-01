@@ -22,6 +22,7 @@ $(document).ready(function(){
     $('.ft-menu').append('<li id="li_les" style="float:right;margin-right:10px;font-weight: bold;cursor:pointer;">&#187; Lista de Espera</li>');
     $('.ft-menu').append('<li id="li_ope" style="float:right;margin-right:10px;font-weight: bold;cursor:pointer;"> &#187; Cupom</li>');
     $('.ft-menu').append('<li id="li_bol" style="float:right;margin-right:10px;font-weight: bold;cursor:pointer;"> &#187; Boletos</li>');
+    $('.ft-menu').append('<li id="li_inter" style="float:right;margin-right:10px;font-weight: bold;cursor:pointer;"> &#187; Intervalo</li>');
 
 	$('#data_vcto').datetimepicker({
 			lang:'pt',
