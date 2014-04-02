@@ -95,7 +95,7 @@ $(document).ready(function() {
     $('#dash').click(function(){
         var options = {
             title: {
-                text: 'Movimentaï¿½ï¿½o Financeira'
+                text: 'Movimentação Financeira'
             },
             credits: {
                 enabled: false
@@ -106,7 +106,7 @@ $(document).ready(function() {
             },
             tooltip: {
                 formatter: function() {
-                    return 'Referï¿½ncia: <b>'+ this.x +
+                    return 'Referência: <b>'+ this.x +
                         '</b><br/><b>Valor: R$'+ Highcharts.numberFormat(this.y,2,',','.') +'</b>';
                 }
             },
@@ -246,7 +246,7 @@ $(document).ready(function() {
     $('#stream_table .GOPAGTO').live('click',function(){
         //$('#stream_table tr > td').live('click',function(){
 
-        //$('#transacaoid').html("<span style='font-size:8px';>TRANSAï¿½ï¿½O ID:</span><br/>"+$(this).attr('transacaoid'));
+        //$('#transacaoid').html("<span style='font-size:8px';>TRANSAÇÃO ID:</span><br/>"+$(this).attr('transacaoid'));
         var url = "http://bodysystems.net/_ferramentas/dashboard-iso/toolbar/pagto_details.php";
         var transa = $(this).attr('transacaoid');
         var orig = $(this).attr('origem');
@@ -270,7 +270,7 @@ $(document).ready(function() {
             } ,
             error: function (request, status, error)
             {
-                $('#frame_detail').html('<span style="color: red">Nï¿½o foi possivel gerar o botï¿½o para pagamento.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>');
+                $('#frame_detail').html('<span style="color: red">Não foi possivel gerar o botão para pagamento.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>');
             }
         });
         $('#user_list').fadeOut();
@@ -306,8 +306,8 @@ $(document).ready(function() {
              var d1=new Date();
              var mydate = d1.toLocaleDateString()+ " " + d1.toLocaleTimeString()
 
-             $('#dta_liberacao').html('Data de liberaï¿½ï¿½o:<br/>'+ mydate);
-             $('#dta_alteracao').html('Data de alteraï¿½ï¿½o:<br/>'+mydate);
+             $('#dta_liberacao').html('Data de liberação:<br/>'+ mydate);
+             $('#dta_alteracao').html('Data de alteração:<br/>'+mydate);
              $('#alteracao')
              .html('ENVIO PRIMEIRO LOTE')
              .attr('alteracao','1');
@@ -363,7 +363,7 @@ $(document).ready(function() {
             } ,
             error: function (request, status, error)
             {
-                var msg = '<span style="color: red">Nï¿½o foi possivel fechar este lote.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>' ;
+                var msg = '<span style="color: red">Não foi possivel fechar este lote.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>' ;
                 $('#change_response').html(msg) ;
 
             }
@@ -388,7 +388,7 @@ $(document).ready(function() {
         uitoggle('change');
     });
 
-    // INFORMA QUAL ï¿½ O CLIENTE
+    // INFORMA QUAL É O CLIENTE
     $('#lst_cliente').change(function(){
         //$('#change_response').html($('#lst_cliente').val());
         $('#post-de').html($('#lst_cliente').val())
@@ -441,7 +441,7 @@ $(document).ready(function() {
             } ,
             error: function (request, status, error)
             {
-                var msg = '<span style="color: red">Nï¿½o foi possivel carregar as informaï¿½ï¿½es.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>' ;
+                var msg = '<span style="color: red">Não foi possivel carregar as informações.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>' ;
                 $('#change_response').html(msg) ;
 
             }
@@ -554,35 +554,6 @@ $(document).ready(function() {
         });
     })
 
-    //INTERVALO DE CARGA DO PAINEL
-    $('#li_inter').live('click',function(){
-        $.fancybox($("#li_inter"),{
-            href : '#interval_frame',
-            type: 'inline',
-            maxWidth    : 580,
-            maxHeight    : 410,
-            padding     : 0,
-            fitToView    : true,
-            modal        : true,
-            locked        : true,
-            width        : 580,
-            height        : 410,
-            autoSize    : false,
-            closeClick    : false,
-            openEffect    : 'elastic',
-            closeEffect    : 'elastic',
-            helpers : {
-                overlay : {
-                    css : {
-                        'background' : 'rgba(0, 0, 0, 0.80)',
-                    }
-                }
-            }
-        });
-    })
-
-
-
     //COMBOS DA LISTA DE ESPERA
     $('.clsEspera').change(function(){
 
@@ -637,7 +608,7 @@ $(document).ready(function() {
             } ,
             error: function (request, status, error)
             {
-                var msg = '<span style="color: red">Nï¿½o foi possivel carregar as informaï¿½ï¿½es.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>' ;
+                var msg = '<span style="color: red">Não foi possivel carregar as informações.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>' ;
                 $('#voucher_response').html(msg) ;
 
 
@@ -670,7 +641,7 @@ $(document).ready(function() {
             } ,
             error: function (request, status, error)
             {
-                var msg = '<span style="color: red">Nï¿½o foi possivel gerar o boleto.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>' ;
+                var msg = '<span style="color: red">Não foi possivel gerar o boleto.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>' ;
 
             }
         });
@@ -714,7 +685,7 @@ $(document).ready(function() {
             error: function (request, status, error)
             {
                 $('#loader').remove();
-                var msg = '<span style="color: red">Nï¿½o foi possivel gerar o boleto.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>' ;
+                var msg = '<span style="color: red">Não foi possivel gerar o boleto.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>' ;
                 $('#boleto_response').html(msg);
 
             }
@@ -743,7 +714,7 @@ function getContent(name) {
         } ,
         error: function (request, status, error)
         {
-            $('#response').html('<span style="color: red">Nï¿½o foi possivel gerar o botï¿½o para pagamento.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>');
+            $('#response').html('<span style="color: red">Não foi possivel gerar o botão para pagamento.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>');
         }
     });
 }
@@ -876,8 +847,8 @@ function getEnvio() {
             $('#controle_response').html('');
             if(data!==null) {
                 $('#info_controle').show();
-                $('#dta_liberacao').html('Data de liberaï¿½ï¿½o:<br/>' + data['dta_liberacao']) ;
-                $('#dta_alteracao').html('Data de alteraï¿½ï¿½o:<br/>' + data['dta_alteracao']) ;
+                $('#dta_liberacao').html('Data de liberação:<br/>' + data['dta_liberacao']) ;
+                $('#dta_alteracao').html('Data de alteração:<br/>' + data['dta_alteracao']) ;
                 if(data['ativo']== 1) {
                     $('#ativo').removeClass('stop').addClass('go').html('ENVIO ATIVO');
                     $('#acao').attr('checked',true);
@@ -901,7 +872,7 @@ function getEnvio() {
         } ,
         error: function (request, status, error)
         {
-            $('#controle_response').html('<span style="color: red">Nï¿½o foi possivel realizar a tarefa.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>');
+            $('#controle_response').html('<span style="color: red">Não foi possivel realizar a tarefa.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>');
         }
     });
 }
@@ -930,7 +901,7 @@ function setEnvio(){
         } ,
         error: function (request, status, error)
         {
-            $('#controle_response').html('<span style="color: red">Nï¿½o foi possivel registrar o envio.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>');
+            $('#controle_response').html('<span style="color: red">Não foi possivel registrar o envio.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>');
         }
     });
 }
@@ -966,7 +937,7 @@ function upEnvio(){
         } ,
         error: function (request, status, error)
         {
-            $('#controle_response').html('<span style="color: red">Nï¿½o foi possivel atualizar a informaï¿½ï¿½o.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>');
+            $('#controle_response').html('<span style="color: red">Não foi possivel atualizar a informação.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>');
         }
     });
 }
@@ -991,7 +962,7 @@ function goTransfer(){
         } ,
         error: function (request, status, error)
         {
-            var msg = '<span style="color: red">Nï¿½o foi possivel transferir este cliente.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>' ;
+            var msg = '<span style="color: red">Não foi possivel transferir este cliente.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>' ;
             $('#change_response').html(msg) ;
 
         }
@@ -1019,7 +990,7 @@ function goTransferLimbo(){
         } ,
         error: function (request, status, error)
         {
-            var msg = '<span style="color: red">Nï¿½o foi possivel transferir este cliente.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>' ;
+            var msg = '<span style="color: red">Não foi possivel transferir este cliente.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>' ;
             $('#change_response').html(msg) ;
 
         }
