@@ -19,6 +19,9 @@ $(document).ready(function(){
 
 
     //ITENS OPERACIONAIS DO MENU
+    $operacoes = '  <div id="mnu_content" class="context" style="width:80px;color: white;float:right;margin-right:10px;font-weight: bold;cursor:pointer;">Operacoes</div>';
+
+    $('.ft-menu').append($operacoes);
     $('.ft-menu').append('<li id="li_les" style="float:right;margin-right:10px;font-weight: bold;cursor:pointer;">&#187; Lista de Espera</li>');
     $('.ft-menu').append('<li id="li_ope" style="float:right;margin-right:10px;font-weight: bold;cursor:pointer;"> &#187; Cupom</li>');
     $('.ft-menu').append('<li id="li_bol" style="float:right;margin-right:10px;font-weight: bold;cursor:pointer;"> &#187; Boletos</li>');
@@ -30,7 +33,7 @@ $(document).ready(function(){
             $(this).attr('src',$(this).attr('off'));
         });
         $('#home').addClass('selected');
-        $('#home').attr('src','toolbar/home_on.png')
+        $('#home').attr('src','toolbar/home_on.png');
 
 
         $('#start_page').show();
@@ -52,7 +55,7 @@ $(document).ready(function(){
             helpers : {
                 overlay : {
                     css : {
-                        'background' : 'rgba(0, 0, 0, 0.80)',
+                        'background' : 'rgba(0, 0, 0, 0.80)'
                     }
                 }
             }
@@ -62,7 +65,7 @@ $(document).ready(function(){
         $('#response').html('');
         $('#head').text('WS '+($(this).closest("div").children('#cidade').text()));
         $('#local').text($(this).closest("div").children('#endereco').text());
-        $('#id_evento').text($(this).closest("div").children('#programa').text())
+        $('#id_evento').text($(this).closest("div").children('#programa').text());
         $('#tb_nsaid').val($(this).closest("div").attr('data-nsa'));
         $('#dta_evento').text('Realiza??o: '+$(this).closest("div").attr('data-evento'));
         $('#eventoid').val($('#id_evento').text());
@@ -72,7 +75,7 @@ $(document).ready(function(){
 
         //-----START PAGE ------------------
         var endereco = $(this).closest("div").children('[name=endereco]').text();
-        var local = $(this).closest("div").children('[name=local]').text();;
+        var local = $(this).closest("div").children('[name=local]').text();
         var nome_evento = $(this).closest("div").children('[name=nome_evento]').text();
         $('#desc_ev').html("<div class='startpage'><span style='font-size:24px;'>"+nome_evento+"</span><br/><span id='span_local' style='font-size:14px;'>"+local+"<br/><span id='span_endereco' style='font-size:14px;'>"+endereco+"</span></div>") ;
         setEscala(0);
@@ -171,7 +174,7 @@ $(document).ready(function(){
 $(window).load(function(){
    // $('.ft-menu').append('<li id="li_les" style="float:right;margin-right:5%;font-weight: bold;cursor:pointer;">&#187; Lista de Espera</li>');
     //$('.ft-menu').append('<li id="li_ope" style="float:right;margin-right:5%;font-weight: bold;"> &#187; Opera��es</li>');
-
+    $('.context').jeegoocontext('menu');
 
 });
 
@@ -183,8 +186,8 @@ function startRefresh() {
 
 function setEscala($task) {
     var evento_id = $('#tb_eventoid').val();
-    var professor = $('#treinador').val()
-    var valor = $('#pagto_treinador').val()
+    var professor = $('#treinador').val();
+    var valor = $('#pagto_treinador').val();
     var avisado = $('#aviso_escala').prop('checked');
     var url = "http://bodysystems.net/_ferramentas/dashboard-iso/services/escala.php";
     $.ajax({
@@ -204,7 +207,7 @@ function setEscala($task) {
                 //alert(data[1]);
             } else {
                 $('#treinador').val(data[1]);
-                $('#pagto_treinador').val(data[2])
+                $('#pagto_treinador').val(data[2]);
                 if(data[3]==1){
                     $('#aviso_escala').attr('checked',true);
                 } else {
