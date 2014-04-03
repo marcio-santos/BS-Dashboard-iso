@@ -19,6 +19,9 @@ $(document).ready(function(){
 
 
     //ITENS OPERACIONAIS DO MENU
+    $operacoes = '  <div id="mnu_content" class="context" style="width:80px;color: white;float:right;margin-right:10px;font-weight: bold;cursor:pointer;">Operacoes</div>';
+
+    $('.ft-menu').append($operacoes);
     $('.ft-menu').append('<li id="li_les" style="float:right;margin-right:10px;font-weight: bold;cursor:pointer;">&#187; Lista de Espera</li>');
     $('.ft-menu').append('<li id="li_ope" style="float:right;margin-right:10px;font-weight: bold;cursor:pointer;"> &#187; Cupom</li>');
     $('.ft-menu').append('<li id="li_bol" style="float:right;margin-right:10px;font-weight: bold;cursor:pointer;"> &#187; Boletos</li>');
@@ -171,7 +174,7 @@ $(document).ready(function(){
 $(window).load(function(){
    // $('.ft-menu').append('<li id="li_les" style="float:right;margin-right:5%;font-weight: bold;cursor:pointer;">&#187; Lista de Espera</li>');
     //$('.ft-menu').append('<li id="li_ope" style="float:right;margin-right:5%;font-weight: bold;"> &#187; Opera��es</li>');
-
+    $('.context').jeegoocontext('menu');
 
 });
 
