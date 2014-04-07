@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
 
+
     $('.toolbar').hover(function(){
             var $img_on = $(this).attr('on');
 

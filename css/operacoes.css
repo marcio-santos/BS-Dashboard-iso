@@ -59,11 +59,15 @@
 
 .op_setting_frame {
     -webkit-box-shadow: 1px 1px 1px 1px rgba(200,200,200,0.5);
-    box-shadow: 1px 1px 1px 1px rgba(200,200,200,0.5);
-    -webkit-border-radius: 8px 8px 8px 8px;
-    border-radius: 8px 8px 8px 8px;
-    outline: 1px solid #F5F5F5;
-    outline-offset: 1px;
+    box-shadow: 1px 1px 1px 1px rgba(164,164,164,0.8);
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
     padding:10px;
+    padding-left: 15px;
     margin: 5px;
+    display: block;
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+    border: solid 1px #a6a6a6;
 }
