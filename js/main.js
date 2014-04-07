@@ -19,12 +19,27 @@ $(document).ready(function(){
 
 
     //ITENS OPERACIONAIS DO MENU
-    $operacoes = '  <div id="mnu_content" class="context" style="width:80px;color: white;float:right;margin-right:10px;font-weight: bold;cursor:pointer;">Operacoes</div>';
+    //$operacoes = '<div id="mnu_content" class="context">Operacoes</div>';
+/*
+    var HTML_FILE_URL = 'pages/drop_operacoes.dat' ;
+    $.get(HTML_FILE_URL, function(data) {
+        $('.ft-menu').append(data);
+    });
+*/
 
-    $('.ft-menu').append($operacoes);
+    //$('.ft-menu').append($operacoes);
+    $('.ft-menu').append('<li id="li_oper" style="float:right;margin-right:10px;font-weight: bold;cursor:pointer;"><span class="icon-tasks">|=|</span></li>');
     $('.ft-menu').append('<li id="li_les" style="float:right;margin-right:10px;font-weight: bold;cursor:pointer;">&#187; Lista de Espera</li>');
     $('.ft-menu').append('<li id="li_ope" style="float:right;margin-right:10px;font-weight: bold;cursor:pointer;"> &#187; Cupom</li>');
     $('.ft-menu').append('<li id="li_bol" style="float:right;margin-right:10px;font-weight: bold;cursor:pointer;"> &#187; Boletos</li>');
+
+    $('#data_vcto').datetimepicker({
+            lang:'pt',
+            timepicker:false,
+            format:'d/m/Y',
+            formatDate:'d/m/Y',
+            mask:'39/19/9999'
+    }); 
 
 
     $('.fb').click(function(){
@@ -172,9 +187,7 @@ $(document).ready(function(){
 });
 
 $(window).load(function(){
-   // $('.ft-menu').append('<li id="li_les" style="float:right;margin-right:5%;font-weight: bold;cursor:pointer;">&#187; Lista de Espera</li>');
-    //$('.ft-menu').append('<li id="li_ope" style="float:right;margin-right:5%;font-weight: bold;"> &#187; Opera��es</li>');
-    $('.context').jeegoocontext('menu');
+    //
 
 });
 

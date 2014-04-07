@@ -41,7 +41,7 @@
 
 if(validaCPF($cpf)){
 
-    //==========INTERAÇÕES COM O EVO====================================//
+    //==========INTERAï¿½ï¿½ES COM O EVO====================================//
     $client = new
     SoapClient(
         "http://177.154.134.90:8084/WCF/Clientes/wcfClientes.svc?wsdl"
@@ -72,11 +72,11 @@ if(validaCPF($cpf)){
     $db->setQuery($query);
     $userid = $db->loadResult();
 
-    //VALORES PADRÃO CASO RETORNO SEJA INCOMPATÍVEL
-    $userid = is_null($userid) ? 62: $userid;
-    $evoid = ($evoid==0) ? 11:$evoid;
+    //VALORES PADRï¿½O CASO RETORNO SEJA INCOMPATï¿½VEL
+    $userid = is_null($userid) ? 0: $userid;
+    $evoid = ($evoid==0) ? 0:$evoid;
 
-    //CORRIGE ENDEREÇO CHARSET
+    //CORRIGE ENDEREï¿½O CHARSET
     $endereco = utf8_decode($endereco);
 
     $ret = array($userid,$evoid,$nome,$ende);

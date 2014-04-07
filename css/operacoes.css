@@ -1,0 +1,69 @@
+@charset "UTF-8";
+/* CSS Document */
+
+.op_frame {
+	height:564px;
+	width: 830px;
+	display:none;
+    position: relative;
+}
+
+.op_head {
+	height: 30px;
+	width: 760px;
+	font-size:20px;
+    display: inline-block;
+    padding: 10px;
+    margin-bottom:5px;
+
+
+	
+}
+
+.op_cols {
+	overflow:hidden;
+	
+}
+
+.op_lcol {
+    margin-top:10px;
+	width:175px;
+	height: 500px;
+	float:left;
+    margin-left: 5px;
+    position: relative;
+	
+}
+
+.op_rcol {
+    margin-top:10px;
+	width:645px;
+	height: 500px;
+	float:right;
+}
+
+.op_close {
+	float: right;
+    position: relative;
+    width: 22px;
+    height: 22px;
+    cursor:pointer;
+	
+}
+
+.op_btn_config {
+    position:absolute;
+    bottom:0;
+    left:0;
+}
+
+.op_setting_frame {
+    -webkit-box-shadow: 1px 1px 1px 1px rgba(200,200,200,0.5);
+    box-shadow: 1px 1px 1px 1px rgba(200,200,200,0.5);
+    -webkit-border-radius: 8px 8px 8px 8px;
+    border-radius: 8px 8px 8px 8px;
+    outline: 1px solid #F5F5F5;
+    outline-offset: 1px;
+    padding:10px;
+    margin: 5px;
+}

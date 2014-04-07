@@ -1,0 +1,12 @@
+<div id="demo_drop3" style="float:right;">
+    <div id="launcher3_container">
+        <a id="launcher3" href="javascript:void(0);"
+        style="text-decoration: none;color:white">Select another here ↓</a>
+    </div>
+    <ul id="menu3">
+    <li id="opt_3.1"><a href="javascript:void(0);">Option-3.1</a></li>
+    <hr>
+    <li id="opt_3.2"><a href="javascript:void(0);">Option-3.2</a></li>
+    <li id="opt_3.3"><a href="javascript:void(0);">Option-3.3</a></li>
+    </ul>
+</div>

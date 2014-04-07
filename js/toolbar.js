@@ -484,7 +484,7 @@ $(document).ready(function() {
             helpers : {
                 overlay : {
                     css : {
-                        'background' : 'rgba(0, 0, 0, 0.80)',
+                        'background' : 'rgba(0, 0, 0, 0.80)'
                     }
                 }
             }
@@ -520,7 +520,7 @@ $(document).ready(function() {
             helpers : {
                 overlay : {
                     css : {
-                        'background' : 'rgba(0, 0, 0, 0.80)',
+                        'background' : 'rgba(0, 0, 0, 0.80)'
                     }
                 }
             }
@@ -547,12 +547,40 @@ $(document).ready(function() {
             helpers : {
                 overlay : {
                     css : {
-                        'background' : 'rgba(0, 0, 0, 0.80)',
+                        'background' : 'rgba(0, 0, 0, 0.80)'
                     }
                 }
             }
         });
     })
+
+
+    $('#li_oper').live('click',function(){
+        $.fancybox($("#li_oper"),{
+            href : '#frame',
+            type: 'inline',
+            maxWidth    : 840,
+            maxHeight    : 568,
+            padding     : 5,
+            fitToView    : true,
+            modal        : true,
+            locked        : true,
+            width        : 840,
+            height        : 568,
+            autoSize    : false,
+            closeClick    : false,
+            openEffect    : 'elastic',
+            closeEffect    : 'elastic',
+            helpers : {
+                overlay : {
+                    css : {
+                        'background' : 'rgba(0, 0, 0, 0.80)'
+                    }
+                }
+            }
+        });
+    })
+
 
     //COMBOS DA LISTA DE ESPERA
     $('.clsEspera').change(function(){
@@ -569,6 +597,15 @@ $(document).ready(function() {
     })
 
     $('.close').click(function(){
+        $.fancybox.close();
+        $('#lst_evento_espera').chosen('destroy').html('');
+        $('#lst_cliente_espera').chosen('destroy').html('');
+        //$('.chosen').chosen('destroy');
+
+
+    });
+
+    $('.op_close').click(function(){
         $.fancybox.close();
         $('#lst_evento_espera').chosen('destroy').html('');
         $('#lst_cliente_espera').chosen('destroy').html('');
@@ -631,13 +668,19 @@ $(document).ready(function() {
             } ,
             success: function(data)
             {
-                $('#loader').remove();
+
+                if(data[1]==0){
+                    alert('Cliente não cadastrado no EVO. Impossível gerar boleto.');
+                    $('#criar_boleto').hide();
+                } else {
+
                     $('#loader').remove();
                     $('#userid').val(data[0]);
                     $('#evoid').val(data[1]);
                     $('#sacado').val(data[2]);
                     $('#endereco').val(data[3]);
-
+                    $('#criar_boleto').show();
+            }
             } ,
             error: function (request, status, error)
             {
@@ -998,3 +1041,18 @@ function goTransferLimbo(){
 
 }
 
+function goT($item,$caption) {
+    //FUNCAO PARA PAINEL DE OPERAÇOES E CONFIGURAÇÕES
+    $('#boletos_frame').hide();
+    $('#change_page').hide();
+    $('#lista_espera').hide();
+    $('#boleto_frame').hide();
+    $('#frame_cupom').hide();
+    $('#config').hide();
+
+    $('#'+$item).fadeIn();
+    $('#op_head').html($caption);
+
+
+
+}
