@@ -570,6 +570,9 @@ $(document).ready(function() {
             height        : 568,
             autoSize    : false,
             closeClick    : false,
+            onComplete : function(){
+                $('#slider').dateRangeSlider('resize');
+            },
             openEffect    : 'elastic',
             closeEffect    : 'elastic',
             helpers : {
@@ -579,6 +582,7 @@ $(document).ready(function() {
                     }
                 }
             }
+
         });
     })
 
@@ -1053,11 +1057,8 @@ function goT($item,$caption) {
 
     $('#'+$item).fadeIn();
     $('#op_head').html($caption);
-    if($item=='op_btn_ajuste') {
-        //Data Range
-        $("#slider").dateRangeSlider();
-
+    if($item =='config') {
+        $('#slider').dateRangeSlider('resize');
     }
-
 
 }
