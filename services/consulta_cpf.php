@@ -36,18 +36,21 @@
     }
 
 
-    $cpf = $_POST['cpf_sacado'];
+    $cpf = $_REQUEST['cpf_sacado'];
     $cpf = str_replace('-','',str_replace('.','',$cpf));
+    //print validaCPF($cpf);exit;
 
-if(validaCPF($cpf)){
 
-    //==========INTERAï¿½ï¿½ES COM O EVO====================================//
+if((validaCPF($cpf) && strlen($cpf)==11)||(strlen($cpf)>11)){
+
+    //==========INTERAÇÕES COM O EVO====================================//
     $client = new
     SoapClient(
         "http://177.154.134.90:8084/WCF/Clientes/wcfClientes.svc?wsdl"
     );
-    $tipo = (strlen($cp)>11)? 1:2;
+    $tipo = (strlen($cpf)>11)? 1:2;
     $params = array('IdClienteW12'=>229, 'IdFilial'=>1, 'CpfCnpj'=>$cpf, 'TipoCliente'=>$tipo);
+
     $webService = $client->ListarClienteCPFCNPJ($params);
     $wsResult = $webService->ListarClienteCPFCNPJResult;
 
@@ -56,7 +59,7 @@ if(validaCPF($cpf)){
 
     // Recupera o IdCliente
     $evoid = $wsResult->ID_CLIENTE;
-    $nome = mb_convert_case($wsResult->NOME, MB_CASE_TITLE, "UTF-8");
+    $nome = mb_convert_case($wsResult->NOME_FANTASIA, MB_CASE_TITLE, "UTF-8");
     $email = strtolower($wsResult->EMAIL);
     $cep = $wsResult->CEP;
     $numero =$wsResult->NUMERO;
@@ -68,15 +71,15 @@ if(validaCPF($cpf)){
     $ende = $endereco.','.$numero.' '.$complemento.' '.$bairro.' - '.$cidade.'/'.$estado.' - '.'CEP '.$cep ;
 
     $db= &JFactory::getDbo();
-    $query = "SELECT id FROM wow_users WHERE cpf LIKE ".$db->Quote($cpf);
+    $query = "SELECT id FROM wow_users WHERE username LIKE ".$db->Quote($cpf);
     $db->setQuery($query);
     $userid = $db->loadResult();
 
-    //VALORES PADRï¿½O CASO RETORNO SEJA INCOMPATï¿½VEL
-    $userid = is_null($userid) ? 0: $userid;
-    $evoid = ($evoid==0) ? 0:$evoid;
+    //VALORES PADRÃO CASO RETORNO SEJA INCOMPATÍVEL
+    $userid = is_null($userid) ? 62: $userid;
+    $evoid = ($evoid==0) ? 11:$evoid;
 
-    //CORRIGE ENDEREï¿½O CHARSET
+    //CORRIGE ENDEREÇO CHARSET
     $endereco = utf8_decode($endereco);
 
     $ret = array($userid,$evoid,$nome,$ende);
