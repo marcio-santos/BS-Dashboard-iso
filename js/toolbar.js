@@ -1053,7 +1053,11 @@ function goT($item,$caption) {
 
     $('#'+$item).fadeIn();
     $('#op_head').html($caption);
+    if($item=='op_btn_ajuste') {
+        //Data Range
+        $("#slider").dateRangeSlider();
 
+    }
 
 
 }
