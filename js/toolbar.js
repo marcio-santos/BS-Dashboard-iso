@@ -662,38 +662,49 @@ $(document).ready(function() {
         //RECUPERA NOMES NO LIMBO
         var url = "http://bodysystems.net/_ferramentas/dashboard-iso/services/consulta_cpf.php";
         var cpf = $('#cpf_sacado').val();
+		var msg = 'CNPJ ou CPF inválido.';
+		
+		cpf = cpf.replace('.','');
+		cpf = cpf.replace('/','');
+		cpf = cpf.replace('-','');
+		cpf = cpf.replace(' ','');
+		cpf = cpf.replace('.','');
+		
+		if(cpf == '' || isCpfCnpj(cpf)==false) {			
+			alert(msg);  
+			return false;			
+		} else {
+			$.ajax({
+				type: "POST",
+				url: url,
+				dataType: 'json' ,
+				data: {cpf_sacado:cpf},
+				beforeSend: function(load) {
+					$('#consulta_lcol').append('<div id="loader" style="margin-top: 80px; text-align: center" ><img src="img/loading.gif" /></div>');
+				} ,
+				success: function(data)
+				{
 
-        $.ajax({
-            type: "POST",
-            url: url,
-            dataType: 'json' ,
-            data: {cpf_sacado:cpf},
-            beforeSend: function(load) {
-                $('#consulta_lcol').append('<div id="loader" style="margin-top: 80px; text-align: center" ><img src="img/loading.gif" /></div>');
-            } ,
-            success: function(data)
-            {
+					if(data[1]==0){
+						alert('Cliente não cadastrado no EVO. Impossível gerar boleto.');
+						$('#criar_boleto').hide();
+					} else {
 
-                if(data[1]==0){
-                    alert('Cliente não cadastrado no EVO. Impossível gerar boleto.');
-                    $('#criar_boleto').hide();
-                } else {
+						$('#loader').remove();
+						$('#userid').val(data[0]);
+						$('#evoid').val(data[1]);
+						$('#sacado').val(data[2]);
+						$('#endereco').val(data[3]);
+						$('#criar_boleto').show();
+				}
+				} ,
+				error: function (request, status, error)
+				{
+					var msg = '<span style="color: red">Não foi possivel gerar o boleto.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>' ;
 
-                    $('#loader').remove();
-                    $('#userid').val(data[0]);
-                    $('#evoid').val(data[1]);
-                    $('#sacado').val(data[2]);
-                    $('#endereco').val(data[3]);
-                    $('#criar_boleto').show();
-            }
-            } ,
-            error: function (request, status, error)
-            {
-                var msg = '<span style="color: red">Não foi possivel gerar o boleto.<br/><pre>'+ request.responseText + '</pre><br/>' + status+'</span>' ;
-
-            }
-        });
-
+				}
+			});
+		}
     });
 
     $('#criar_boleto').click(function(){

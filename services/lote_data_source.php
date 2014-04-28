@@ -55,18 +55,18 @@ EOT;
     include ('../../../exec_in_joomla.inc');
     $db = &JFactory::getDBO();
 
-    $query="SELECT despacho_controle.nsa,transacaoid,cnab AS cnab,idcliente,userid,nome_evo,user_email,endereco_remessa,valor_frete,dta_liberacao,eventoid,'BB' as origem
-    FROM boletos_bs INNER JOIN despacho_controle ON eventoid = SUBSTR(cnab,2,5) WHERE ativo = 1 AND compensado = 1 AND ISNULL(enviado)
-    UNION ALL SELECT despacho_controle.nsa,TransacaoID,ProdID AS cnab,IdCliente,userid,(SELECT name FROM wow_users WHERE userid = wow_users.id)as nome_evo,
-    (SELECT email FROM wow_users WHERE userid = wow_users.id)as user_email,
-    CONCAT(CliEndereco,',',CliNumero,',',CliComplemento,' - ',CliBairro,' - ',CliCidade,'/',CliEstado,' CEP:',CliCEP) AS endereco_remessa,
-    ValorFrete,dta_liberacao,eventoid,'PS' as origem FROM PagSeguroTransacoes
-    INNER JOIN despacho_controle ON eventoid = SUBSTR(ProdID,2,5) WHERE ativo = 1 AND StatusTransacao IN ('Aprovado','Completo') AND LENGTH(Anotacao)= 0
-    UNION ALL SELECT despacho_controle.nsa,transacaoid,cnab AS cnab,evoid,userid, (SELECT name FROM wow_users WHERE userid = wow_users.id)as nome_evo,
-    (SELECT email FROM wow_users WHERE userid = wow_users.id)as user_email,
-    CONCAT( remessa_logradouro ,',',remessa_numero,',',remessa_complemento,' - ',remessa_bairro,' - ',remessa_cidade,'/',remessa_uf,' CEP:',remessa_cep) AS endereco_remessa,
-    valor_frete,dta_liberacao,eventoid,'MP' as origem FROM MercadoPagoTransacoes
-    INNER JOIN despacho_controle ON eventoid = SUBSTR(cnab,2,5) WHERE ativo = 1 AND status LIKE 'approved' AND ISNULL(status_evo);" ;
+    $query="SELECT des1.nsa, bol.transacaoid, bol.cnab AS cnab, bol.idcliente, bol.userid, bol.nome_evo, bol.user_email, bol.endereco_remessa, bol.valor_frete, des1.dta_liberacao, des1.eventoid,'BB' as origem
+    FROM boletos_bs AS bol INNER JOIN despacho_controle AS des1 ON des1.eventoid = SUBSTR(bol.cnab,2,5) WHERE des1.ativo = 1 AND bol.compensado = 1 AND ISNULL(bol.enviado)
+    UNION ALL SELECT des2.nsa, PagS.TransacaoID,PagS.ProdID AS cnab,PagS.IdCliente,PagS.userid,(SELECT name FROM wow_users WHERE userid = wow_users.id)as nome_evo,
+    (SELECT email FROM wow_users WHERE PagS.userid = wow_users.id)as user_email,
+    CONCAT(PagS.CliEndereco,',',PagS.CliNumero,',',PagS.CliComplemento,' - ',PagS.CliBairro,' - ',PagS.CliCidade,'/',PagS.CliEstado,' CEP:',PagS.CliCEP) AS endereco_remessa,
+    PagS.ValorFrete,des2.dta_liberacao,des2.eventoid,'PS' as origem FROM PagSeguroTransacoes AS PagS
+    INNER JOIN despacho_controle AS des2 ON des2.eventoid = SUBSTR(PagS.ProdID,2,5) WHERE des2.ativo = 1 AND PagS.StatusTransacao IN ('Aprovado','Completo') AND LENGTH(PagS.Anotacao)= 0
+		UNION ALL SELECT des3.nsa,mp.transacaoid,mp.cnab AS cnab,mp.evoid,mp.userid, (SELECT name FROM wow_users WHERE mp.userid = wow_users.id)as nome_evo,
+    (SELECT email FROM wow_users WHERE mp.userid = wow_users.id)as user_email,
+    CONCAT( mp.remessa_logradouro ,',',mp.remessa_numero,',',mp.remessa_complemento,' - ',mp.remessa_bairro,' - ',mp.remessa_cidade,'/',mp.remessa_uf,' CEP:',mp.remessa_cep) AS endereco_remessa,
+    mp.valor_frete,des3.dta_liberacao,des3.eventoid,'MP' as origem FROM MercadoPagoTransacoes AS mp
+    INNER JOIN despacho_controle AS des3 ON des3.eventoid = SUBSTR(mp.cnab,2,5) WHERE des3.ativo = 1 AND mp.status LIKE 'approved' AND ISNULL(mp.status_evo);" ;
 
     try {
         $db->setQuery($query);

@@ -27,7 +27,7 @@
     $template_folha = file_get_contents('../pages/template_etiqueta.html');
 
     $file = isset($_REQUEST['f'])? $_REQUEST['f'] : 'pre-lote.log' ;
-    $lote = file_get_contents($file);
+    $lote = file_get_contents('jsn_output/'.$file);
     $log = (array)json_decode($lote,true);
     
     $template_etiqueta = <<<EOT

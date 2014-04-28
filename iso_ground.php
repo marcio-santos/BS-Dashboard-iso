@@ -73,6 +73,18 @@ function cmp($a, $b)  {
     return strcmp($a->INICIO, $b->INICIO);
 }
 
+function getStatusEnvio($eventoid) {
+
+    //VERIFICA SE O EVENTO J√Å FOI LIBERADO (E EST√Å)
+    $db = &JFactory::getDBO();
+    $query = "SELECT ativo FROM despacho_controle WHERE eventoid LIKE ".$db->Quote($eventoid);
+    $db->setQuery($query);
+    $result = $db->loadResult();
+
+    return $result;
+
+
+}
 
 function diffDate($d1, $d2, $type='', $sep='-')
 {
@@ -136,6 +148,7 @@ $element_orange = <<<EOT
       <p style="display:none;" name="endereco" >{ENDERECO}</p>
       <p style="display:none;" name="local">{LOCAL}</p>
       <p class="programa {PROG}"></p>
+      {TRUCK}
   </div>
 EOT;
 
@@ -150,6 +163,7 @@ $element_red = <<<EOT
       <p style="display:none;" name="endereco" >{ENDERECO}</p>
       <p style="display:none;" name="local">{LOCAL}</p>
       <p class="programa {PROG}"></p>
+      {TRUCK}
     </div>
 EOT;
 
@@ -164,7 +178,7 @@ $element_green = <<<EOT
       <p style="display:none;" name="endereco" >{ENDERECO}</p>
       <p style="display:none;" name="local">{LOCAL}</p>
       <p class="programa {PROG}"></p>
-      <img src="img/wait_dispatch.gif" class="wait_dispatch" />
+      {TRUCK}
     </div>
 EOT;
 
@@ -179,8 +193,24 @@ $element_blue = <<<EOT
       <p style="display:none;" name="endereco" >{ENDERECO}</p>
       <p style="display:none;" name="local">{LOCAL}</p>
       <p class="programa {PROG}"></p>
+      {TRUCK}
     </div>
 EOT;
+
+//CARREGA ELEMENTOS DE CONFIGURA√á√ÉO
+
+$arr = array('ini_date' => '20140421','end_date' => '20140431','corum' => array('SAO'=>8,'CAM'=>4));
+$output = json_encode($arr);
+file_put_contents('config.json',$output) ;
+
+$arr = file_get_contents('config.json');
+
+$input = json_decode($arr);
+file_put_contents('config.arr',print_r($input,true)) ;
+
+
+
+//FIM DA CARGA DE CONFIGURA√á√ïES
 
 if($tipo_treino == 7) {
     $datas = getRodadaWS() ; //PEGA O REGISTRO MAIS RECENTE DA TABELA (LAST INDEX)
@@ -208,7 +238,7 @@ $wsResultTR = $webService->ListarTreinamentosWebsiteResult->VOBS;
     file_put_contents('ws.log',print_r($wsResultTR,true)."\n------------\n".print_r($params,true)."\n$inicio\n$fim\n".print_r($datas,true));
 
 
-if($tipo_treino != 7) { // SE N√O FOR WORKSHOP
+if($tipo_treino != 7) { // SE NÔøΩO FOR WORKSHOP
 
 //MTA
 $tipo_treino = 3;
@@ -279,10 +309,15 @@ foreach($wsResult as $obj) {
     $corum = getCorum($id);
     $coruns = ($corum > 1)? $corum ." inscritos" : $corum ." inscrito" ;
     $cidade = utf8_decode($obj->CIDADE);
-    $cidade = (trim($obj->CIDADE) == 'S„o JosÈ do Rio Preto')? 'S.J. Rio Preto':$cidade;
-    $cidade = (trim($obj->CIDADE) == 'S√O JOS… DOS CAMPOS')? 'S.J. dos Campos':$cidade;
-    $cidade = (trim($obj->CIDADE) == 'S„o JosÈ dos Campos')? 'S.J. dos Campos':$cidade;
+    $cidade = (trim($obj->CIDADE) == 'S√£o Jos√© do Rio Preto')? 'S.J. Rio Preto':$cidade;
+    $cidade = (trim($obj->CIDADE) == 'S√ÉO JOS√â DOS CAMPOS')? 'S.J. dos Campos':$cidade;
+    $cidade = (trim($obj->CIDADE) == 'S√£o Jos√© dos Campos')? 'S.J. dos Campos':$cidade;
     $prog = strtolower($obj->DS_ABREVIACAO);
+
+    //COLOCA O CAMINH√ÉOZINHO PISCANDO
+    $strTruck = '<img src="img/wait_dispatch.gif" class="wait_dispatch" />';
+
+    $Truck = (getStatusEnvio($id)==1)?$strTruck:"";
 
     $vars = array(
         '{ID}' => $i,
@@ -295,11 +330,12 @@ foreach($wsResult as $obj) {
         '{NOME_EVENTO}' => ($tipo_treino!=7) ?  utf8_decode($nome_evento): $cidade,
         '{ENDERECO}' => utf8_decode($endereco),
         '{CORUM}' =>$coruns,
-        '{PROG}' => $prog
+        '{PROG}' => $prog,
+        '{TRUCK}' => $Truck
     ) ;
 
 
-//CONFIGURA CODIFICA«√O DE CORES
+//CONFIGURA CODIFICA√á√ÉO DE CORES
     //POR PRAZO
     $data_ref = date('Y-m-d',strtotime($obj->INICIO));
     $interv = diffDate($data_dead,$data_ref,'D','-');

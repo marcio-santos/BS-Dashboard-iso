@@ -112,7 +112,7 @@
     if(strlen($msg)==0) {
         $novo_lote = str_replace(':','',str_replace('-','',str_replace(' | ','',$lote))).'.jsn';
         $msg .= "LOTE CRIADO COM SUCESSO!\nInseridos $counter registros" ;
-        rename('pre-lote.log',$novo_lote);
+        rename('pre-lote.log','jsn_output/'.$novo_lote);
     }
     echo $msg;
 

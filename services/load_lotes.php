@@ -1,7 +1,7 @@
 <?php
     include('../../../exec_in_joomla.inc');
     $db = &JFactory::getDBO();
-    $query = "SELECT lote,IF(dta_enviado = dta_liberado,'0',dta_enviado)AS data_envio,count(lote) AS total FROM despacho GROUP BY lote ORDER BY lote DESC;"   ;
+    $query = "SELECT lote,IF(dta_enviado = '0000-00-00%',dta_liberado,dta_enviado) AS data_envio,count(lote) AS total FROM despacho GROUP BY lote ORDER BY lote DESC;"   ;
     $db->setQuery($query);
     $result = $db->loadObjectList();
     foreach($result as $obj) {
