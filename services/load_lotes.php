@@ -7,7 +7,7 @@
     foreach($result as $obj) {
         $total = str_pad($obj->total,3,'0',STR_PAD_LEFT);
         $file = str_replace(':','',str_replace('-','',str_replace(' | ','',$obj->lote)));
-        $xls  = "http://bodysystems.net/_ferramentas/dashboard-iso/services/lote_xls.php?f=".$file.'.jsn';
+        $xls  = "http://bodysystems.net/_ferramentas/dashboard-iso/services/lote_xls.php?f=jsn_output/".$file.'.jsn';
         $xfile = "http://bodysystems.net/_ferramentas/dashboard-iso/services/etiquetas_data_source.php?f=".$file.'.jsn';
         /* //HIGHSLIDE
         $html .= "<li class='list'><a class='list' href='#frmEnvio' onclick='return hs.htmlExpand(this, { contentId: &apos;frmEnvio&apos;,captionText:&apos;$obj->lote&apos; } )'><img style='float:right;padding:5px;' src='img/calendar3.png' /></a><a class='list' href='$xls' alt='Planilha de Controle' title='Planilha de Controle'><img src='img/page_excel.png' style='float:right;padding:5px;cursor:pointer;'  /></a><span class='list' alt='Total de Etiquetas no lote' title='Total de Etiquetas no lote'>$total</span><a alt='Abrir lote' title='Abrir lote' href='$xfile' class='lote-fechado' target='_blank' data-lote='$xfile' data-envios='$obj->total'>$obj->lote</a></li>"  ;
